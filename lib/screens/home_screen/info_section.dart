@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wework/utils/common_utils.dart';
+import 'package:wework/widgets/curly_container.dart';
 
 class InfoSection extends StatelessWidget {
   const InfoSection({Key? key}) : super(key: key);
@@ -7,24 +9,66 @@ class InfoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        clipBehavior: Clip.none,
         children: [
-          Text(
-            'Now Playing',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+          const CurlyContainer(
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 20,
+                bottom: 24,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "We Movies",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    "22 Moviesd are loadid in now playing",
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          SizedBox(height: 10),
-          Text(
-            'Movies',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+          Positioned(
+            top: 8,
+            left: 12,
+            child: Text(
+              CommonUtils.getFormattedDate(
+                DateTime.now(),
+                pretty: false,
+              ),
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
+          // Text(
+          //   'Now Playing',
+          //   style: TextStyle(
+          //     fontSize: 20,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
+          // SizedBox(height: 10),
+          // Text(
+          //   'Movies',
+          //   style: TextStyle(
+          //     fontSize: 20,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
         ],
       ),
     );

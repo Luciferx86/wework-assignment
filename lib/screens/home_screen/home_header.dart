@@ -33,6 +33,7 @@ class HomeHeader extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(
+                    fontSize: 12,
                     color: Theme.of(context).hintColor,
                     fontWeight: FontWeight.w500,
                   ),
@@ -40,7 +41,7 @@ class HomeHeader extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 46),
+          const SizedBox(width: 70),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(99),

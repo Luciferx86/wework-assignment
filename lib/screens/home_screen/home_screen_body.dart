@@ -34,6 +34,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
         ),
         const HomeHeader(),
         SearchWidget(),
+        const SizedBox(height: 14),
         InfoSection(),
         NowPlayingMoviesList(),
         TopRatedMoviesList(),
