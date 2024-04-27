@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wework/enums/movie_loading_status.dart';
+import 'package:wework/enums/movie_type_enum.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/events/movies_event.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/now_playing_movies_bloc.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/states/now_playing_movies_state.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/movie_curly_card/movie_card_curly.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/movie_curly_card/movie_card_curly_shimmer.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/now_playing_index_counter.dart';
+import 'package:wework/widgets/movie_error_widget.dart';
 import 'package:wework/widgets/section_header.dart';
 
 class NowPlayingMoviesList extends StatelessWidget {
@@ -30,7 +32,7 @@ class NowPlayingMoviesList extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             if (state.status.isError)
-              const SizedBox.shrink()
+              const MovieErrorWidget(movieType: MovieType.NOW_PLAYING)
             else
               SizedBox(
                 height: 340,
@@ -40,12 +42,21 @@ class NowPlayingMoviesList extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   controller: _pageController,
                   itemCount: state.status.isSuccess ? state.movies.length : 5,
-                  onPageChanged: (int page) =>
-                      context.read<NowPlayingMoviesBloc>().add(
-                            PageChangedEvent(
-                              page: page,
-                            ),
+                  onPageChanged: (int page) {
+                    context.read<NowPlayingMoviesBloc>().add(
+                          PageChangedEvent(
+                            page: page,
                           ),
+                        );
+                    if (state.status.isSuccess &&
+                        page == state.movies.length - 1) {
+                      context.read<NowPlayingMoviesBloc>().add(
+                            const FetchMoviesEvent(
+                              movieType: MovieType.NOW_PLAYING,
+                            ),
+                          );
+                    }
+                  },
                   itemBuilder: (BuildContext context, int index) {
                     return state.status.isSuccess
                         ? MovieCardCurly(

@@ -3,28 +3,27 @@ import 'dart:convert';
 import 'package:wework/enums/movie_type_enum.dart';
 import 'package:wework/models/movie_model.dart';
 import 'package:http/http.dart';
-import 'package:http/http.dart' as http;
+import 'package:wework/services/http_service.dart';
 import 'package:wework/utils/constants.dart';
 
 abstract class MoviesRepo {
-  Future<List<Movie>> getMovies({required MovieType movieType});
+  Future<List<Movie>> getMovies({
+    required MovieType movieType,
+    int pageNumber,
+  });
 }
 
 class MoviesRepoImpl implements MoviesRepo {
-  // static const _baseUrl = "api.themoviedb.org/3";
-  // static const String _GET_MOVIES = "movie/now_playing?language=en-US&page=1";
+  final HttpService httpService;
+
+  MoviesRepoImpl() : httpService = HttpService(Constants.BASE_URL);
   @override
-  Future<List<Movie>> getMovies({required MovieType movieType}) async {
-    Uri uri = Uri.parse(
-        "https://api.themoviedb.org/3/movie/${movieType == MovieType.NOW_PLAYING ? "now_playing" : "top_rated"}?language=en-US&page=1");
-    // Uri uri = Uri.https(_baseUrl, _GET_MOVIES);
-    Response response = await http.get(
-      uri,
-      headers: {
-        "Authorization": "Bearer ${Constants.API_BEARER_TOKEN}",
-        "accept": "application/json",
-        "Content-Type": "application/json",
-      },
+  Future<List<Movie>> getMovies({
+    required MovieType movieType,
+    int pageNumber = 1,
+  }) async {
+    Response response = await httpService.getRequest(
+      "/movie/${movieType.apiPath}?language=en-US&page=$pageNumber",
     );
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body) as Map<String, dynamic>;

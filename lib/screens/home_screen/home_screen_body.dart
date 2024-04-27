@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wework/enums/movie_loading_status.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/now_playing_movies_bloc.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/events/movies_event.dart';
 import 'package:wework/enums/movie_type_enum.dart';
@@ -17,20 +18,34 @@ class HomeScreenBody extends StatefulWidget {
 }
 
 class _HomeScreenBodyState extends State<HomeScreenBody> {
+  final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
+    super.initState();
     context
         .read<NowPlayingMoviesBloc>()
         .add(const FetchMoviesEvent(movieType: MovieType.NOW_PLAYING));
     context
         .read<TopRatedMoviesBloc>()
         .add(const FetchMoviesEvent(movieType: MovieType.TOP_RATED));
-    super.initState();
+    _scrollController.addListener(_scrollChange);
+  }
+
+  _scrollChange() {
+    if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange &&
+        context.read<TopRatedMoviesBloc>().state.status.isSuccess) {
+      context
+          .read<TopRatedMoviesBloc>()
+          .add(const FetchMoviesEvent(movieType: MovieType.NOW_PLAYING));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: _scrollController,
       child: Column(
         children: [
           const SizedBox(height: 16),

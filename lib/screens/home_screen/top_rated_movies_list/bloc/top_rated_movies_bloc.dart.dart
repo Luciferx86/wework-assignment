@@ -8,17 +8,26 @@ class TopRatedMoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   final MoviesRepo moviesRepo;
 
   TopRatedMoviesBloc({required this.moviesRepo}) : super(const MoviesState()) {
-    on<FetchMoviesEvent>(_mapGetCategoriesEventToState);
+    on<FetchMoviesEvent>(_mapFetchMoviesEventToState);
   }
 
-  void _mapGetCategoriesEventToState(
+  void _mapFetchMoviesEventToState(
     FetchMoviesEvent event,
     Emitter<MoviesState> emit,
   ) async {
-    emit(state.copyWith(status: MoviesLoadingStatus.loading));
+    if (state.pageNumber == 0) {
+      emit(state.copyWith(status: MoviesLoadingStatus.loading));
+    }
     try {
-      final movies = await moviesRepo.getMovies(movieType: event.movieType);
-      emit(state.copyWith(status: MoviesLoadingStatus.success, movies: movies));
+      final movies = await moviesRepo.getMovies(
+        movieType: event.movieType,
+        pageNumber: state.pageNumber + 1,
+      );
+      emit(state.copyWith(
+        status: MoviesLoadingStatus.success,
+        movies: [...state.movies, ...movies],
+        pageNumber: state.pageNumber + 1,
+      ));
     } catch (e) {
       emit(state.copyWith(status: MoviesLoadingStatus.error));
     }

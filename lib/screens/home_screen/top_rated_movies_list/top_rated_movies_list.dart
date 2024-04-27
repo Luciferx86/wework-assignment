@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wework/enums/movie_loading_status.dart';
+import 'package:wework/enums/movie_type_enum.dart';
 import 'package:wework/screens/home_screen/top_rated_movies_list/bloc/states/movies_state.dart';
 import 'package:wework/screens/home_screen/top_rated_movies_list/bloc/top_rated_movies_bloc.dart.dart';
 import 'package:wework/screens/home_screen/top_rated_movies_list/top_rated_movie_card.dart';
 import 'package:wework/screens/home_screen/top_rated_movies_list/top_rated_movie_card_shimmer.dart';
+import 'package:wework/widgets/movie_error_widget.dart';
 import 'package:wework/widgets/section_header.dart';
 
 class TopRatedMoviesList extends StatelessWidget {
@@ -23,7 +25,7 @@ class TopRatedMoviesList extends StatelessWidget {
               ),
             ),
             if (state.status.isError)
-              const SizedBox.shrink()
+              const MovieErrorWidget(movieType: MovieType.TOP_RATED)
             else
               Padding(
                 padding: const EdgeInsets.symmetric(
