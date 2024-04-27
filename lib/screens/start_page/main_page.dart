@@ -9,13 +9,14 @@ class MainPage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          fontFamily: "Caros",
-          useMaterial3: false,
-          colorScheme: const ColorScheme.light(
-            secondary: Color(0xffcbf051),
-            error: Color(0xffffd700),
-            primary: Color(0xffcbf051),
-          )),
+        fontFamily: "Caros",
+        useMaterial3: false,
+        colorScheme: const ColorScheme.light(
+          secondary: Color(0xffcbf051),
+          error: Color(0xffffd700),
+          primary: Color(0xffcbf051),
+        ),
+      ),
       home: const HomeScreen(),
     );
   }

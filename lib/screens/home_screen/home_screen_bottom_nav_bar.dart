@@ -22,11 +22,13 @@ class HomeScreenBottomNavBar extends StatelessWidget {
       selectedLabelStyle: const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w700,
+        color: Colors.black,
       ),
       onTap: onChange,
       unselectedLabelStyle: const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w500,
+        color: Colors.red,
       ),
     );
   }

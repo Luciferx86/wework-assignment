@@ -148,5 +148,16 @@ class CommonUtils {
     }
     return postfix;
   }
+
+  static String getFullLanguage({required String languageCode}) {
+    switch (languageCode) {
+      case "ar":
+        return "Arabic";
+      case "en":
+        return "English";
+      default:
+        return "Other";
+    }
+  }
   
 }

@@ -38,6 +38,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
           const InfoSection(),
           NowPlayingMoviesList(),
           TopRatedMoviesList(),
+          const SizedBox(height: 44),
         ],
       ),
     );

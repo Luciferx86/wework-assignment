@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:path_drawing/path_drawing.dart';
 
 class MovieCardCurlyClipper extends CustomClipper<Path> {
-  final bool isFlipped;
   final double scale;
   MovieCardCurlyClipper({
-    this.isFlipped = false,
     this.scale = 1,
   });
   @override
