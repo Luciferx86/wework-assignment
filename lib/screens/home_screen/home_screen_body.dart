@@ -27,18 +27,19 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: MediaQuery.of(context).viewPadding.top,
-        ),
-        const HomeHeader(),
-        SearchWidget(),
-        const SizedBox(height: 14),
-        InfoSection(),
-        NowPlayingMoviesList(),
-        TopRatedMoviesList(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).viewPadding.top,
+          ),
+          const HomeHeader(),
+          const SearchWidget(),
+          const InfoSection(),
+          NowPlayingMoviesList(),
+          TopRatedMoviesList(),
+        ],
+      ),
     );
   }
 }

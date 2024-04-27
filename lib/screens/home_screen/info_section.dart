@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wework/utils/common_utils.dart';
-import 'package:wework/widgets/curly_container.dart';
+import 'package:wework/widgets/info_card_curly/info_card_curly.dart';
 
 class InfoSection extends StatelessWidget {
   const InfoSection({Key? key}) : super(key: key);
@@ -8,16 +8,19 @@ class InfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(
+        vertical: 24,
+        horizontal: 16,
+      ),
       child: Stack(
         // crossAxisAlignment: CrossAxisAlignment.start,
         clipBehavior: Clip.none,
         children: [
-          const CurlyContainer(
+          const InfoCardCurly(
             child: Padding(
               padding: EdgeInsets.only(
                 left: 20,
-                bottom: 24,
+                bottom: 20,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -43,13 +46,13 @@ class InfoSection extends StatelessWidget {
           ),
           Positioned(
             top: 8,
-            left: 12,
+            left: 16,
             child: Text(
               CommonUtils.getFormattedDate(
                 DateTime.now(),
                 pretty: false,
               ),
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w600,
               ),
             ),

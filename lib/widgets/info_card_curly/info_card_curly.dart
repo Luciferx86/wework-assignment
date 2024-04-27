@@ -1,14 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:wework/widgets/curly_container_clipper.dart';
+import 'package:wework/widgets/info_card_curly/info_card_curly_clipper.dart';
 
-class CurlyContainer extends StatelessWidget {
+class InfoCardCurly extends StatelessWidget {
   // final String imageURL;
   final bool isFlipped;
   final double scale;
   final Widget? child;
 
-  const CurlyContainer({
+  const InfoCardCurly({
     Key? key,
     this.child,
     // required this.imageURL,
@@ -18,11 +17,11 @@ class CurlyContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 130,
-      width: 325 * scale,
+      height: 120,
+      width: double.infinity,
       child: ClipPath(
         // child: CachedNetworkImage(imageUrl: imageURL, fit: BoxFit.contain),
-        clipper: CurlyContainerClipper(
+        clipper: InfoCardCurlyClipper(
           isFlipped: isFlipped,
         ),
         // child: CachedNetworkImage(imageUrl: imageURL, fit: BoxFit.contain),
