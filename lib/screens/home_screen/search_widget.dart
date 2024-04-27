@@ -13,10 +13,7 @@ class SearchWidget extends StatelessWidget {
           color: Colors.white,
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 14,
-            horizontal: 18,
-          ),
+          padding: const EdgeInsets.all(18),
           child: Row(
             children: [
               Image.asset(

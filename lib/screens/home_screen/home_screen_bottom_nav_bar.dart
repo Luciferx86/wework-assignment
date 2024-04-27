@@ -25,6 +25,7 @@ class HomeScreenBottomNavBar extends StatelessWidget {
         color: Colors.black,
       ),
       onTap: onChange,
+      selectedItemColor: Colors.black,
       unselectedLabelStyle: const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w500,

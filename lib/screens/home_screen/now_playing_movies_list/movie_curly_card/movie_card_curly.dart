@@ -44,7 +44,7 @@ class MovieCardCurly extends StatelessWidget {
           ),
           Positioned(
             top: 8,
-            left: 30,
+            left: 36,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -121,7 +121,7 @@ class MovieCardCurly extends StatelessWidget {
           Positioned(
             bottom: 0,
             child: MovieSubCardCurly(
-              movie: movie,
+              languageCode: movie.originalLanguage,
               child: Padding(
                 padding: const EdgeInsets.only(
                   top: 30,

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:wework/models/movie_model.dart';
 import 'package:wework/utils/common_utils.dart';
 import 'package:wework/widgets/blutty_container.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/movie_curly_card/movie_card_sub_curly_clipper.dart';
 
 class MovieSubCardCurly extends StatelessWidget {
-  final Movie movie;
+  final String languageCode;
   final Widget child;
 
   const MovieSubCardCurly({
-    required this.movie,
+    required this.languageCode,
     required this.child,
     Key? key,
   }) : super(key: key);
@@ -48,7 +47,7 @@ class MovieSubCardCurly extends StatelessWidget {
                     const SizedBox(width: 4),
                     Text(
                       CommonUtils.getFullLanguage(
-                        languageCode: movie.originalLanguage,
+                        languageCode: languageCode,
                       ),
                       style: const TextStyle(
                         fontSize: 11,

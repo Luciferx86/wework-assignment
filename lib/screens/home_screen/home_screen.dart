@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wework/screens/home_screen/home_header.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/now_playing_movies_bloc.dart';
 import 'package:wework/screens/home_screen/home_screen_body.dart';
 import 'package:wework/screens/home_screen/home_screen_bottom_nav_bar.dart';
@@ -26,6 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: const Color(0xffA490A5),
+        title: const HomeHeader(),
+      ),
       bottomNavigationBar: HomeScreenBottomNavBar(
         selectedIndex: selectedIndex,
         onChange: (index) => animateTo(pageNumber: index),

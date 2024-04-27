@@ -159,5 +159,17 @@ class CommonUtils {
         return "Other";
     }
   }
+
+  static String formattedNumberCounter(int number) {
+    if (number < 1000) {
+      return number.toStringAsFixed(0);
+    } else if (number < 1000000) {
+      return "${(number / 1000).toStringAsFixed(1)}K";
+    } else if (number < 1000000000) {
+      return "${(number / 1000000).toStringAsFixed(1)}M";
+    } else {
+      return "${(number / 1000000000).toStringAsFixed(1)}B";
+    }
+  }
   
 }
