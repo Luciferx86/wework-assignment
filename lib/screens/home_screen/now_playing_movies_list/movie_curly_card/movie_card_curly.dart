@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wework/models/movie_model.dart';
-import 'package:wework/widgets/movie_curly_card.dart/movie_card_curly_clipper.dart';
-import 'package:wework/widgets/movie_curly_card.dart/movie_card_sub_curly_container.dart';
+import 'package:wework/screens/home_screen/now_playing_movies_list/movie_curly_card/movie_card_curly_clipper.dart';
+import 'package:wework/screens/home_screen/now_playing_movies_list/movie_curly_card/movie_card_sub_curly_container.dart';
 
 class MovieCardCurly extends StatelessWidget {
   final Movie movie;
@@ -50,7 +50,6 @@ class MovieCardCurly extends StatelessWidget {
               children: [
                 Text(
                   movie.voteAverage.toStringAsFixed(2),
-                  // "6.67",
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -91,7 +90,6 @@ class MovieCardCurly extends StatelessWidget {
                         const SizedBox(width: 4),
                         Text(
                           movie.popularity.toStringAsFixed(0),
-                          // "716",
                           style: const TextStyle(
                             fontSize: 12,
                             color: Colors.white,

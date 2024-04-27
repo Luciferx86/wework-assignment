@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wework/blocs/now_playing_movies/bloc.dart';
-import 'package:wework/blocs/now_playing_movies/states/movies_state.dart';
-import 'package:wework/widgets/movie_curly_card.dart/movie_card_curly.dart';
+import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/now_playing_movies_bloc.dart';
+import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/states/movies_state.dart';
+import 'package:wework/screens/home_screen/now_playing_movies_list/movie_curly_card/movie_card_curly.dart';
 import 'package:wework/widgets/section_header.dart';
 
 class NowPlayingMoviesList extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wework/models/movie_model.dart';
 import 'package:wework/utils/common_utils.dart';
 import 'package:wework/widgets/blutty_container.dart';
-import 'package:wework/widgets/movie_curly_card.dart/movie_card_sub_curly_clipper.dart';
+import 'package:wework/screens/home_screen/now_playing_movies_list/movie_curly_card/movie_card_sub_curly_clipper.dart';
 
 class MovieSubCardCurly extends StatelessWidget {
   final Movie movie;

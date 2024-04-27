@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wework/blocs/now_playing_movies/bloc.dart';
+import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/now_playing_movies_bloc.dart';
 import 'package:wework/screens/home_screen/home_screen_body.dart';
 import 'package:wework/screens/home_screen/home_screen_bottom_nav_bar.dart';
+import 'package:wework/screens/home_screen/top_rated_movies_list/bloc/top_rated_movies_bloc.dart.dart';
 import 'package:wework/services/movies_repo.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -44,6 +45,11 @@ class _HomeScreenState extends State<HomeScreen> {
           providers: [
             BlocProvider<NowPlayingMoviesBloc>(
               create: (context) => NowPlayingMoviesBloc(
+                moviesRepo: MoviesRepoImpl(),
+              ),
+            ),
+            BlocProvider<TopRatedMoviesBloc>(
+              create: (context) => TopRatedMoviesBloc(
                 moviesRepo: MoviesRepoImpl(),
               ),
             ),

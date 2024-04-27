@@ -1,4 +1,4 @@
-import 'package:wework/blocs/now_playing_movies/states/movies_state.dart';
+import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/states/movies_state.dart';
 
 class MovieInitState extends MoviesState {
   MovieInitState() : super(movies: []);

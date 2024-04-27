@@ -11,12 +11,12 @@ abstract class MoviesRepo {
 }
 
 class MoviesRepoImpl implements MoviesRepo {
-  static const _baseUrl = "api.themoviedb.org/3";
-  static const String _GET_MOVIES = "movie/now_playing?language=en-US&page=1";
+  // static const _baseUrl = "api.themoviedb.org/3";
+  // static const String _GET_MOVIES = "movie/now_playing?language=en-US&page=1";
   @override
   Future<List<Movie>> getMovies({required MovieType movieType}) async {
     Uri uri = Uri.parse(
-        "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1");
+        "https://api.themoviedb.org/3/movie/${movieType == MovieType.NOW_PLAYING ? "now_playing" : "top_rated"}?language=en-US&page=1");
     // Uri uri = Uri.https(_baseUrl, _GET_MOVIES);
     Response response = await http.get(
       uri,
