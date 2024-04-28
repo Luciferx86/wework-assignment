@@ -28,64 +28,36 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ApplicationBloc, ApplicationState>(
-      listener: (context, state) {
-        if (state.status == ApplicationStatus.success) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => const HomeScreen(),
+    return Scaffold(
+      body: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(9999),
+            border: Border.all(
+              color: Colors.black,
+              width: 1,
+              style: BorderStyle.solid,
             ),
-          );
-        } else if (state.status == ApplicationStatus.error) {
-          late Widget widget;
-          switch (state.applicationError) {
-            case ApplicationErrorType.location_error:
-              widget = const LocationErrorScreen();
-              break;
-            case ApplicationErrorType.no_internet:
-            case ApplicationErrorType.other:
-            case null:
-              widget = const NoInternetScreen();
-              break;
-          }
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => widget,
-            ),
-          );
-        }
-      },
-      child: Scaffold(
-        body: Center(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(9999),
-              border: Border.all(
-                color: Colors.black,
-                width: 1,
-                style: BorderStyle.solid,
+          ),
+          child: Stack(
+            children: [
+              const SizedBox(
+                height: 212,
+                width: 212,
+                child: CircularProgressIndicator(
+                  color: Colors.black,
+                  strokeWidth: 5,
+                ),
               ),
-            ),
-            child: Stack(
-              children: [
-                const SizedBox(
-                  height: 212,
-                  width: 212,
-                  child: CircularProgressIndicator(
-                    color: Colors.black,
-                    strokeWidth: 5,
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Image.asset(
+                  "assets/images/logo_full.png",
+                  width: 180,
+                  height: 180,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Image.asset(
-                    "assets/images/logo_full.png",
-                    width: 180,
-                    height: 180,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

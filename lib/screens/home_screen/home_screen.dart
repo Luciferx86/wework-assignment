@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         backgroundColor: const Color(0xffA490A5),
         title: const HomeHeader(),
+        toolbarHeight: 70,
       ),
       bottomNavigationBar: HomeScreenBottomNavBar(
         selectedIndex: selectedIndex,

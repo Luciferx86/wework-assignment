@@ -22,9 +22,10 @@ class ApplicationRepoImpl implements ApplicationRepo {
         position.longitude,
       );
       return UserLocation(
-        mainAddress: placemarks.first.name ?? "",
+        mainAddress:
+            "${placemarks.first.name ?? ""}, ${placemarks.first.street ?? ""}",
         subAddress:
-            "${placemarks.first.street ?? ""}, ${placemarks.first.subAdministrativeArea ?? ""}",
+            "${placemarks.first.subLocality ?? ""}, ${placemarks.first.locality ?? ""}, ${placemarks.first.administrativeArea ?? ""}",
       );
     } catch (e) {
       rethrow;
@@ -39,6 +40,9 @@ class ApplicationRepoImpl implements ApplicationRepo {
 
   @override
   void openApplicationSettings() {
-    AppSettings.openAppSettings(type: AppSettingsType.location);
+    AppSettings.openAppSettings(
+      type: AppSettingsType.settings,
+      asAnotherTask: true,
+    );
   }
 }

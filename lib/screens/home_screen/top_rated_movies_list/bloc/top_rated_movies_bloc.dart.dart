@@ -27,7 +27,10 @@ class TopRatedMoviesBloc extends Bloc<MoviesEvent, MoviesState> {
       );
       emit(state.copyWith(
         status: MoviesLoadingStatus.success,
-        movies: [...state.movies, ...movies],
+        movies: [
+          if (!event.reFetch) ...state.movies,
+          ...movies,
+        ],
         pageNumber: pageNumber + 1,
       ));
     } catch (e) {

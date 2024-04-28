@@ -10,43 +10,46 @@ class NoInternetScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                'assets/images/no_internet.png',
-                height: 120,
-                width: 120,
-              ),
-              const SizedBox(height: 20),
-              const Center(
-                child: Text(
-                  "No Internet",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: Scaffold(
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  'assets/images/no_internet.png',
+                  height: 120,
+                  width: 120,
+                ),
+                const SizedBox(height: 20),
+                const Center(
+                  child: Text(
+                    "No Internet",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: 160,
-                child: PrimaryButton(
-                  onPressed: () {
-                    context.read<ApplicationBloc>().add(
-                          InitialiseApplicationEvent(),
-                        );
-                  },
-                  titleSize: 14,
-                  title: "Retry",
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: 160,
+                  child: PrimaryButton(
+                    onPressed: () {
+                      context.read<ApplicationBloc>().add(
+                            InitialiseApplicationEvent(),
+                          );
+                    },
+                    titleSize: 14,
+                    title: "Retry",
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
