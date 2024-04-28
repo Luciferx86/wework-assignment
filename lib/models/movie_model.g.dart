@@ -7,22 +7,23 @@ part of 'movie_model.dart';
 // **************************************************************************
 
 Movie _$MovieFromJson(Map<String, dynamic> json) => Movie(
-      adult: json['adult'] as bool,
-      backdropPath: json['backdrop_path'] as String,
-      genreIds: (json['genre_ids'] as List<dynamic>)
-          .map((e) => (e as num).toInt())
-          .toList(),
+      adult: json['adult'] as bool? ?? false,
+      backdropPath: json['backdrop_path'] as String? ?? '',
+      genreIds: (json['genre_ids'] as List<dynamic>?)
+              ?.map((e) => (e as num).toInt())
+              .toList() ??
+          [],
       id: (json['id'] as num).toInt(),
-      originalLanguage: json['original_language'] as String,
+      originalLanguage: json['original_language'] as String? ?? 'en',
       originalTitle: json['original_title'] as String,
       overview: json['overview'] as String,
-      popularity: (json['popularity'] as num).toDouble(),
-      posterPath: json['poster_path'] as String,
+      popularity: (json['popularity'] as num?)?.toDouble() ?? 0,
+      posterPath: json['poster_path'] as String? ?? '',
       releaseDate: DateTime.parse(json['release_date'] as String),
       title: json['title'] as String,
-      video: json['video'] as bool,
-      voteAverage: (json['vote_average'] as num).toDouble(),
-      voteCount: (json['vote_count'] as num).toInt(),
+      video: json['video'] as bool? ?? false,
+      voteAverage: (json['vote_average'] as num?)?.toDouble() ?? 0,
+      voteCount: (json['vote_count'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$MovieToJson(Movie instance) => <String, dynamic>{

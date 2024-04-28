@@ -18,8 +18,7 @@ class NowPlayingMoviesBloc extends Bloc<MoviesEvent, NowPlayingMoviesState> {
     FetchMoviesEvent event,
     Emitter<NowPlayingMoviesState> emit,
   ) async {
-
-    var pageNumber = event.reFetch ? 0 : state.pageNumber;
+    var pageNumber = state.pageNumber;
     if (pageNumber == 0) {
       emit(state.copyWith(status: MoviesLoadingStatus.loading));
     }
@@ -31,14 +30,15 @@ class NowPlayingMoviesBloc extends Bloc<MoviesEvent, NowPlayingMoviesState> {
       emit(state.copyWith(
         status: MoviesLoadingStatus.success,
         movies: [
-          if (!event.reFetch) ...state.movies,
+          ...state.movies,
           ...movies,
         ],
         pageNumber: pageNumber + 1,
-        activePageIndex: event.reFetch ? 0 : state.activePageIndex,
       ));
     } catch (e) {
-      emit(state.copyWith(status: MoviesLoadingStatus.error));
+      if (pageNumber == 0) {
+        emit(state.copyWith(status: MoviesLoadingStatus.error));
+      }
     }
   }
 

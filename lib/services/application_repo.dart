@@ -40,6 +40,9 @@ class ApplicationRepoImpl implements ApplicationRepo {
 
   @override
   void openApplicationSettings() {
+    // This will work on Android Debug and Release build
+    // This won't work on IOS debug build, as the app doesn't get registerd in the settings app.
+    // Will work on IOS release build.
     AppSettings.openAppSettings(
       type: AppSettingsType.settings,
       asAnotherTask: true,

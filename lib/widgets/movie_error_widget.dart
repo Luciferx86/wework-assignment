@@ -34,11 +34,11 @@ class MovieErrorWidget extends StatelessWidget {
               onPressed: () {
                 if (movieType == MovieType.NOW_PLAYING) {
                   context.read<NowPlayingMoviesBloc>().add(
-                        const FetchMoviesEvent(reFetch: true),
+                        FetchMoviesEvent(),
                       );
                 } else {
                   context.read<TopRatedMoviesBloc>().add(
-                        const FetchMoviesEvent(reFetch: true),
+                        FetchMoviesEvent(),
                       );
                 }
               },

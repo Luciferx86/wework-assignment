@@ -4,33 +4,33 @@ part 'movie_model.g.dart';
 
 @JsonSerializable(includeIfNull: true)
 class Movie {
-  @JsonKey(name: "adult")
+  @JsonKey(name: "adult", defaultValue: false)
   bool adult;
-  @JsonKey(name: "backdrop_path")
+  @JsonKey(name: "backdrop_path", defaultValue: "")
   String backdropPath;
-  @JsonKey(name: "genre_ids")
+  @JsonKey(name: "genre_ids", defaultValue: [])
   List<int> genreIds;
   @JsonKey(name: "id")
   int id;
-  @JsonKey(name: "original_language")
+  @JsonKey(name: "original_language", defaultValue: "en")
   String originalLanguage;
   @JsonKey(name: "original_title")
   String originalTitle;
   @JsonKey(name: "overview")
   String overview;
-  @JsonKey(name: "popularity")
+  @JsonKey(name: "popularity", defaultValue: 0)
   double popularity;
-  @JsonKey(name: "poster_path")
+  @JsonKey(name: "poster_path", defaultValue: "")
   String posterPath;
   @JsonKey(name: "release_date")
   DateTime releaseDate;
   @JsonKey(name: "title")
   String title;
-  @JsonKey(name: "video")
+  @JsonKey(name: "video", defaultValue: false)
   bool video;
-  @JsonKey(name: "vote_average")
+  @JsonKey(name: "vote_average", defaultValue: 0)
   double voteAverage;
-  @JsonKey(name: "vote_count")
+  @JsonKey(name: "vote_count", defaultValue: 0)
   int voteCount;
 
   Movie({
