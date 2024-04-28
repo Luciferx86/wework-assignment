@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wework/enums/movie_type_enum.dart';
+import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/events/movies_event.dart';
+import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/now_playing_movies_bloc.dart';
+import 'package:wework/screens/home_screen/top_rated_movies_list/bloc/top_rated_movies_bloc.dart.dart';
 import 'package:wework/widgets/primary_button.dart';
 
 class MovieErrorWidget extends StatelessWidget {
@@ -27,7 +31,17 @@ class MovieErrorWidget extends StatelessWidget {
           SizedBox(
             width: 120,
             child: PrimaryButton(
-              onPressed: () => onRetry?.call(),
+              onPressed: () {
+                if (movieType == MovieType.NOW_PLAYING) {
+                  context.read<NowPlayingMoviesBloc>().add(
+                        const FetchMoviesEvent(reFetch: true),
+                      );
+                } else {
+                  context.read<TopRatedMoviesBloc>().add(
+                        const FetchMoviesEvent(reFetch: true),
+                      );
+                }
+              },
               title: 'Retry',
             ),
           ),

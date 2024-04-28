@@ -51,9 +51,7 @@ class NowPlayingMoviesList extends StatelessWidget {
                     if (state.status.isSuccess &&
                         page == state.movies.length - 1) {
                       context.read<NowPlayingMoviesBloc>().add(
-                            const FetchMoviesEvent(
-                              movieType: MovieType.NOW_PLAYING,
-                            ),
+                            const FetchMoviesEvent(),
                           );
                     }
                   },

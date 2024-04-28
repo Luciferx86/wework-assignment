@@ -1,40 +1,91 @@
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatelessWidget {
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wework/enums/application_error_type.dart';
+import 'package:wework/enums/application_status.dart';
+import 'package:wework/global_blocs/application_bloc/application_bloc.dart';
+import 'package:wework/global_blocs/application_bloc/events/application_bloc_events.dart';
+import 'package:wework/global_blocs/application_bloc/state/application_state.dart';
+import 'package:wework/screens/home_screen/home_screen.dart';
+import 'package:wework/screens/location_error_screen/location_error_screen.dart';
+import 'package:wework/screens/no_internet_screen/no_internet_screen.dart';
+
+class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ApplicationBloc>().add(
+          InitialiseApplicationEvent(),
+        );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(9999),
-            border: Border.all(
-              color: Colors.black,
-              width: 1,
-              style: BorderStyle.solid,
+    return BlocListener<ApplicationBloc, ApplicationState>(
+      listener: (context, state) {
+        if (state.status == ApplicationStatus.success) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
             ),
-          ),
-          child: Stack(
-            children: [
-              const SizedBox(
-                height: 212,
-                width: 212,
-                child: CircularProgressIndicator(
-                  color: Colors.black,
-                  strokeWidth: 5,
-                ),
+          );
+        } else if (state.status == ApplicationStatus.error) {
+          late Widget widget;
+          switch (state.applicationError) {
+            case ApplicationErrorType.location_error:
+              widget = const LocationErrorScreen();
+              break;
+            case ApplicationErrorType.no_internet:
+            case ApplicationErrorType.other:
+            case null:
+              widget = const NoInternetScreen();
+              break;
+          }
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => widget,
+            ),
+          );
+        }
+      },
+      child: Scaffold(
+        body: Center(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(9999),
+              border: Border.all(
+                color: Colors.black,
+                width: 1,
+                style: BorderStyle.solid,
               ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Image.asset(
-                  "assets/images/logo_full.png",
-                  width: 180,
-                  height: 180,
+            ),
+            child: Stack(
+              children: [
+                const SizedBox(
+                  height: 212,
+                  width: 212,
+                  child: CircularProgressIndicator(
+                    color: Colors.black,
+                    strokeWidth: 5,
+                  ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Image.asset(
+                    "assets/images/logo_full.png",
+                    width: 180,
+                    height: 180,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

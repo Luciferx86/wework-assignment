@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wework/enums/movie_loading_status.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/now_playing_movies_bloc.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/events/movies_event.dart';
-import 'package:wework/enums/movie_type_enum.dart';
 import 'package:wework/screens/home_screen/info_section.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/now_playing_movies_list.dart';
 import 'package:wework/screens/home_screen/search_widget.dart';
@@ -24,10 +23,10 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
     super.initState();
     context
         .read<NowPlayingMoviesBloc>()
-        .add(const FetchMoviesEvent(movieType: MovieType.NOW_PLAYING));
+        .add(const FetchMoviesEvent());
     context
         .read<TopRatedMoviesBloc>()
-        .add(const FetchMoviesEvent(movieType: MovieType.TOP_RATED));
+        .add(const FetchMoviesEvent());
     _scrollController.addListener(_scrollChange);
   }
 
@@ -38,7 +37,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
         context.read<TopRatedMoviesBloc>().state.status.isSuccess) {
       context
           .read<TopRatedMoviesBloc>()
-          .add(const FetchMoviesEvent(movieType: MovieType.NOW_PLAYING));
+          .add(const FetchMoviesEvent());
     }
   }
 
