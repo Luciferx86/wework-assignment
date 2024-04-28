@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SectionHeader extends StatelessWidget {
+  final int? counter;
   final String title;
-  const SectionHeader({required this.title, super.key});
+  const SectionHeader({
+    required this.title,
+    super.key,
+    this.counter,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +37,28 @@ class SectionHeader extends StatelessWidget {
             ),
           ),
         ),
+        if (counter != null)
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(99),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 4,
+              ),
+              child: Text(
+                "$counter in total",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0,
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }

@@ -25,7 +25,7 @@ class ApplicationRepoImpl implements ApplicationRepo {
         mainAddress:
             "${placemarks.first.name ?? ""}, ${placemarks.first.street ?? ""}",
         subAddress:
-            "${placemarks.first.subLocality ?? ""}, ${placemarks.first.locality ?? ""}, ${placemarks.first.administrativeArea ?? ""}",
+            "${(placemarks.first.subLocality != null && placemarks.first.subLocality != "") ? placemarks.first.subLocality : "Unknown"}, ${placemarks.first.locality ?? ""}, ${placemarks.first.administrativeArea ?? ""}",
       );
     } catch (e) {
       rethrow;
