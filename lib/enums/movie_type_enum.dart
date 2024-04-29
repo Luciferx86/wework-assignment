@@ -21,4 +21,13 @@ extension MovieTypeX on MovieType {
         return "Top Rated";
     }
   }
+
+  String get dbKey {
+    switch (this) {
+      case MovieType.NOW_PLAYING:
+        return "now_playing_movies";
+      case MovieType.TOP_RATED:
+        return "top_rated_movies";
+    }
+  }
 }

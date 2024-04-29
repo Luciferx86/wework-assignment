@@ -5,6 +5,7 @@ import 'package:wework/enums/location_error.dart';
 import 'package:wework/global_blocs/application_bloc/events/application_bloc_events.dart';
 import 'package:wework/global_blocs/application_bloc/state/application_state.dart';
 import 'package:wework/services/application_repo.dart';
+import 'package:wework/services/cache_service.dart';
 
 class ApplicationBloc extends Bloc<ApplicationBlocEvent, ApplicationState> {
   final ApplicationRepo applicationRepo;
@@ -44,6 +45,7 @@ class ApplicationBloc extends Bloc<ApplicationBlocEvent, ApplicationState> {
         userLocation: userLocation,
         status: ApplicationStatus.success,
       ));
+      CacheService().storeLastFetchedLocation(userLocation: userLocation);
     } catch (e) {
       emit(state.copyWith(
         locationError: e is LocationError ? e : null,

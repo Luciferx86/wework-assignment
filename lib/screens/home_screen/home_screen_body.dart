@@ -39,22 +39,32 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      controller: _scrollController,
-      child: Column(
-        children: [
-          const SizedBox(height: 16),
-          InkWell(
-              onTap: () {
-                showSearchMovieBottomsheet();
-              },
-              child: const SearchWidget()),
-          const InfoSection(),
-          NowPlayingMoviesList(),
-          const SizedBox(height: 24),
-          const TopRatedMoviesList(),
-          const SizedBox(height: 44),
-        ],
+    return RefreshIndicator(
+      onRefresh: () async {
+        context
+            .read<NowPlayingMoviesBloc>()
+            .add(const CleanAndReFetchMoviesEvent());
+        context
+            .read<TopRatedMoviesBloc>()
+            .add(const CleanAndReFetchMoviesEvent());
+      },
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        child: Column(
+          children: [
+            const SizedBox(height: 16),
+            InkWell(
+                onTap: () {
+                  showSearchMovieBottomsheet();
+                },
+                child: const SearchWidget()),
+            const InfoSection(),
+            NowPlayingMoviesList(),
+            const SizedBox(height: 24),
+            const TopRatedMoviesList(),
+            const SizedBox(height: 44),
+          ],
+        ),
       ),
     );
   }
@@ -75,7 +85,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
       ),
     );
     if (movie != null) {
-      // return await showTrackDetailsDialog(
+      // return await showMovieDetails(
       //   context: context,
       //   track: track,
       //   playlistController: playlistController,

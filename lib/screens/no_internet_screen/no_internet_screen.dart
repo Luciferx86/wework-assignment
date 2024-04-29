@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wework/enums/location_error.dart';
 import 'package:wework/global_blocs/application_bloc/application_bloc.dart';
 import 'package:wework/global_blocs/application_bloc/events/application_bloc_events.dart';
 import 'package:wework/widgets/primary_button.dart';
@@ -54,16 +53,5 @@ class NoInternetScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String getWarningText(LocationError errorType) {
-    switch (errorType) {
-      case LocationError.temporary_denied:
-        return 'Location Permission Denied';
-      case LocationError.permanently_denied:
-        return 'Location Permission Denied Permanently';
-      case LocationError.services_disabled:
-        return 'Location Services Disabled';
-    }
   }
 }

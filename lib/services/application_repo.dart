@@ -5,7 +5,7 @@ import 'package:wework/models/user_location.dart';
 import 'package:wework/services/location_service.dart';
 
 abstract class ApplicationRepo {
-  Future<UserLocation?> getUserLocation();
+  Future<UserLocation> getUserLocation();
   Future<bool> checkConnectivity();
   void openApplicationSettings();
 }

@@ -5,7 +5,6 @@ abstract class MoviesEvent extends Equatable {
 }
 
 class FetchMoviesEvent extends MoviesEvent {
-  // final bool reFetch;
   const FetchMoviesEvent();
 
   @override
@@ -18,4 +17,11 @@ class PageChangedEvent extends MoviesEvent {
 
   @override
   List<Object?> get props => [page];
+}
+
+class CleanAndReFetchMoviesEvent extends MoviesEvent {
+  const CleanAndReFetchMoviesEvent();
+
+  @override
+  List<Object?> get props => [];
 }

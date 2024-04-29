@@ -3,6 +3,7 @@ import 'package:wework/enums/movie_loading_status.dart';
 import 'package:wework/enums/movie_type_enum.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/events/movies_event.dart';
 import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/states/now_playing_movies_state.dart';
+import 'package:wework/services/cache_service.dart';
 import 'package:wework/services/movies_repo.dart';
 
 class NowPlayingMoviesBloc extends Bloc<MoviesEvent, NowPlayingMoviesState> {
@@ -11,7 +12,8 @@ class NowPlayingMoviesBloc extends Bloc<MoviesEvent, NowPlayingMoviesState> {
   NowPlayingMoviesBloc({required this.moviesRepo})
       : super(const NowPlayingMoviesState()) {
     on<FetchMoviesEvent>(_mapFetchMoviesEventToState);
-    on<PageChangedEvent>(_mapPageChnagedEventToState);
+    on<PageChangedEvent>(_mapPageChangedEventToState);
+    on<CleanAndReFetchMoviesEvent>(_mapCleanAndReFetchMoviesEventToState);
   }
 
   void _mapFetchMoviesEventToState(
@@ -35,6 +37,10 @@ class NowPlayingMoviesBloc extends Bloc<MoviesEvent, NowPlayingMoviesState> {
         ],
         pageNumber: pageNumber + 1,
       ));
+      CacheService().storeMovies(
+        movies: state.movies,
+        movieType: MovieType.NOW_PLAYING,
+      );
     } catch (e) {
       if (pageNumber == 0) {
         emit(state.copyWith(status: MoviesLoadingStatus.error));
@@ -42,9 +48,21 @@ class NowPlayingMoviesBloc extends Bloc<MoviesEvent, NowPlayingMoviesState> {
     }
   }
 
-  void _mapPageChnagedEventToState(
+  void _mapPageChangedEventToState(
     PageChangedEvent event,
     Emitter<NowPlayingMoviesState> emit,
   ) =>
       emit(state.copyWith(activePageIndex: event.page));
+
+  void _mapCleanAndReFetchMoviesEventToState(
+    CleanAndReFetchMoviesEvent event,
+    Emitter<NowPlayingMoviesState> emit,
+  ) {
+    emit(state.copyWith(
+      status: MoviesLoadingStatus.loading,
+      movies: [],
+      pageNumber: 0,
+    ));
+    add(const FetchMoviesEvent());
+  }
 }
