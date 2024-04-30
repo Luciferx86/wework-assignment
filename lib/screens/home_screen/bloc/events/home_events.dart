@@ -10,7 +10,7 @@ class FetchMoviesEvent extends HomeEvent {
   const FetchMoviesEvent({required this.movieType});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [movieType];
 }
 
 class PageChangedEvent extends HomeEvent {

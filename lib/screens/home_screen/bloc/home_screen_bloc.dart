@@ -20,7 +20,7 @@ class HomeScreenBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) async {
     MovieType type = event.movieType;
-    var pageNumber = type == MovieType.NOW_PLAYING
+    int pageNumber = type == MovieType.NOW_PLAYING
         ? state.nowPlayingPageNumber
         : state.topRatedPageNumber;
     if (pageNumber == 0) {

@@ -47,19 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider<HomeScreenBloc>(
-              create: (context) => HomeScreenBloc(
-                homeRepo: HomeRepoImpl(),
-              ),
-            ),
-            // BlocProvider<TopRatedMoviesBloc>(
-            //   create: (context) => TopRatedMoviesBloc(
-            //     moviesRepo: MoviesRepoImpl(),
-            //   ),
-            // ),
-          ],
+        child: BlocProvider(
+          create: (context) => HomeScreenBloc(
+            homeRepo: HomeRepoImpl(),
+          ),
           child: const HomeScreenBody(),
         ),
       ),
