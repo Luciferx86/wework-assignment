@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wework/enums/movie_loading_status.dart';
-import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/now_playing_movies_bloc.dart';
-import 'package:wework/screens/home_screen/now_playing_movies_list/bloc/states/now_playing_movies_state.dart';
+import 'package:wework/screens/home_screen/bloc/home_screen_bloc.dart';
+import 'package:wework/screens/home_screen/bloc/state/home_state.dart';
 import 'package:wework/utils/common_utils.dart';
 import 'package:wework/widgets/info_card_curly/info_card_curly.dart';
 
@@ -11,7 +11,7 @@ class InfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NowPlayingMoviesBloc, NowPlayingMoviesState>(
+    return BlocBuilder<HomeScreenBloc, HomeState>(
       builder: (context, state) {
         return Container(
           padding: const EdgeInsets.symmetric(
@@ -69,12 +69,12 @@ class InfoSection extends StatelessWidget {
     );
   }
 
-  String getStatusText(NowPlayingMoviesState state) {
-    switch (state.status) {
+  String getStatusText(HomeState state) {
+    switch (state.nowPlayingMoviesStatus) {
       case MoviesLoadingStatus.initial:
         return "";
       case MoviesLoadingStatus.success:
-        return "${state.movies.length} Movies are loaded in now playing";
+        return "${state.nowPlayingMovies.length} Movies are loaded in now playing";
       case MoviesLoadingStatus.error:
         return "Error loading movies";
       case MoviesLoadingStatus.loading:
