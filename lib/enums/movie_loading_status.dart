@@ -1,4 +1,9 @@
-enum MoviesLoadingStatus { initial, success, error, loading }
+enum MoviesLoadingStatus {
+  initial,
+  success,
+  error,
+  loading,
+}
 
 extension MoviesLoadingStatusX on MoviesLoadingStatus {
   bool get isInitial => this == MoviesLoadingStatus.initial;
