@@ -39,8 +39,9 @@ class NowPlayingMoviesList extends StatelessWidget {
               const MovieErrorWidget(movieType: MovieType.NOW_PLAYING)
             else
               Visibility(
-                visible: state.nowPlayingMoviesStatus.isSuccess &&
-                    nowPlayingMovies.isNotEmpty,
+                visible: (state.nowPlayingMoviesStatus.isSuccess &&
+                        nowPlayingMovies.isNotEmpty) ||
+                    state.nowPlayingMoviesStatus.isLoading,
                 replacement: const Padding(
                   padding: EdgeInsets.symmetric(vertical: 12),
                   child: EmptyList(),

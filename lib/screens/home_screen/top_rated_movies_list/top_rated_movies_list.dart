@@ -32,8 +32,9 @@ class TopRatedMoviesList extends StatelessWidget {
               const MovieErrorWidget(movieType: MovieType.TOP_RATED)
             else
               Visibility(
-                visible: state.topRatedMoviesStatus.isSuccess &&
-                    topRatedMovies.isNotEmpty,
+                visible: (state.topRatedMoviesStatus.isSuccess &&
+                        topRatedMovies.isNotEmpty) ||
+                    state.topRatedMoviesStatus.isLoading,
                 replacement: const Padding(
                   padding: EdgeInsets.symmetric(vertical: 12),
                   child: EmptyList(),
