@@ -13,6 +13,7 @@ class HomeScreenBloc extends Bloc<HomeEvent, HomeState> {
     on<FetchMoviesEvent>(_mapFetchMoviesEventToState);
     on<PageChangedEvent>(_mapPageChangedEventToState);
     on<CleanAndReFetchMoviesEvent>(_mapCleanAndReFetchMoviesEventToState);
+    on<SearchQueryChangedEvent>(_mapSearchQueryChangedEventToState);
   }
 
   void _mapFetchMoviesEventToState(
@@ -96,5 +97,12 @@ class HomeScreenBloc extends Bloc<HomeEvent, HomeState> {
     ));
     add(const FetchMoviesEvent(movieType: MovieType.NOW_PLAYING));
     add(const FetchMoviesEvent(movieType: MovieType.TOP_RATED));
+  }
+
+  void _mapSearchQueryChangedEventToState(
+    SearchQueryChangedEvent event,
+    Emitter<HomeState> emit,
+  ) {
+    emit(state.copyWith(searchQuery: event.query));
   }
 }
