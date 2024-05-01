@@ -21,12 +21,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
   @override
   void initState() {
     super.initState();
-    context
-        .read<HomeScreenBloc>()
-        .add(const FetchMoviesEvent(movieType: MovieType.NOW_PLAYING));
-    context
-        .read<HomeScreenBloc>()
-        .add(const FetchMoviesEvent(movieType: MovieType.TOP_RATED));
+    context.read<HomeScreenBloc>().add(const LoadInitialState());
     _scrollController.addListener(_scrollChange);
   }
 

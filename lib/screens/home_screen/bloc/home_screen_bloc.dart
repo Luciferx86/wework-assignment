@@ -9,11 +9,31 @@ import 'package:wework/services/cache_service.dart';
 class HomeScreenBloc extends Bloc<HomeEvent, HomeState> {
   final HomeRepo homeRepo;
 
-  HomeScreenBloc({required this.homeRepo}) : super(const HomeState()) {
+  HomeScreenBloc({
+    required this.homeRepo,
+  }) : super(const HomeState()) {
+    on<LoadInitialState>(_mapLoadInitialStateToState);
     on<FetchMoviesEvent>(_mapFetchMoviesEventToState);
     on<PageChangedEvent>(_mapPageChangedEventToState);
     on<CleanAndReFetchMoviesEvent>(_mapCleanAndReFetchMoviesEventToState);
     on<SearchQueryChangedEvent>(_mapSearchQueryChangedEventToState);
+  }
+
+  _mapLoadInitialStateToState(
+    LoadInitialState event,
+    Emitter<HomeState> emit,
+  ) async {
+    emit(state.copyWith(
+      nowPlayingMoviesStatus: MoviesLoadingStatus.loading,
+      topRatedMoviesStatus: MoviesLoadingStatus.loading,
+    ));
+    final cachedState = await homeRepo.loadCaches();
+    if (cachedState != null) {
+      emit(cachedState);
+    } else {
+      add(const FetchMoviesEvent(movieType: MovieType.NOW_PLAYING));
+      add(const FetchMoviesEvent(movieType: MovieType.TOP_RATED));
+    }
   }
 
   void _mapFetchMoviesEventToState(

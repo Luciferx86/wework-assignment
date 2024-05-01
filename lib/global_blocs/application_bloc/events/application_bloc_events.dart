@@ -16,3 +16,6 @@ class FetchUserLocationEvent extends ApplicationBlocEvent {
 class OpenLocationSettingsEvent extends ApplicationBlocEvent {
   OpenLocationSettingsEvent() : super();
 }
+class LoadCachedDataEvent extends ApplicationBlocEvent {
+  LoadCachedDataEvent() : super();
+}

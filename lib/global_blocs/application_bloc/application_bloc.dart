@@ -4,8 +4,8 @@ import 'package:wework/enums/application_status.dart';
 import 'package:wework/enums/location_error.dart';
 import 'package:wework/global_blocs/application_bloc/events/application_bloc_events.dart';
 import 'package:wework/global_blocs/application_bloc/state/application_state.dart';
+import 'package:wework/models/user_location.dart';
 import 'package:wework/services/application_repo.dart';
-import 'package:wework/services/cache_service.dart';
 
 class ApplicationBloc extends Bloc<ApplicationBlocEvent, ApplicationState> {
   final ApplicationRepo applicationRepo;
@@ -15,6 +15,7 @@ class ApplicationBloc extends Bloc<ApplicationBlocEvent, ApplicationState> {
     on<InitialiseApplicationEvent>(_mapInitialiseApplicationEventToState);
     on<FetchUserLocationEvent>(_mapFetchUserLocationEventToState);
     on<OpenLocationSettingsEvent>(_mapOpenLocationSettingsEventToState);
+    on<LoadCachedDataEvent>(_mapLoadCachedDataEventToState);
   }
 
   void _mapInitialiseApplicationEventToState(
@@ -45,7 +46,6 @@ class ApplicationBloc extends Bloc<ApplicationBlocEvent, ApplicationState> {
         userLocation: userLocation,
         status: ApplicationStatus.success,
       ));
-      CacheService().storeLastFetchedLocation(userLocation: userLocation);
     } catch (e) {
       emit(state.copyWith(
         locationError: e is LocationError ? e : null,
@@ -60,5 +60,18 @@ class ApplicationBloc extends Bloc<ApplicationBlocEvent, ApplicationState> {
     Emitter<ApplicationState> emit,
   ) async {
     applicationRepo.openApplicationSettings();
+  }
+
+  void _mapLoadCachedDataEventToState(
+    LoadCachedDataEvent event,
+    Emitter<ApplicationState> emit,
+  ) {
+    emit(state.copyWith(
+      userLocation: const UserLocation(
+        mainAddress: "Unknown",
+        subAddress: "Unknown",
+      ),
+      status: ApplicationStatus.success,
+    ));
   }
 }
