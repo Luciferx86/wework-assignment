@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wework/enums/movie_loading_status.dart';
 import 'package:wework/enums/movie_type_enum.dart';
+import 'package:wework/models/movie_model.dart';
 import 'package:wework/screens/home_screen/bloc/events/home_events.dart';
 import 'package:wework/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:wework/screens/home_screen/bloc/state/home_state.dart';
@@ -14,8 +15,9 @@ import 'package:wework/widgets/section_header.dart';
 
 class NowPlayingMoviesList extends StatelessWidget {
   final PageController _pageController;
+  final Function({required Movie movie}) onMovieTap;
 
-  NowPlayingMoviesList({super.key})
+  NowPlayingMoviesList({required this.onMovieTap, super.key})
       : _pageController = PageController(viewportFraction: 0.75);
 
   @override
@@ -71,8 +73,13 @@ class NowPlayingMoviesList extends StatelessWidget {
                     },
                     itemBuilder: (BuildContext context, int index) {
                       return state.nowPlayingMoviesStatus.isSuccess
-                          ? MovieCardCurly(
-                              movie: nowPlayingMovies[index],
+                          ? GestureDetector(
+                              onTap: () => onMovieTap(
+                                movie: nowPlayingMovies[index],
+                              ),
+                              child: MovieCardCurly(
+                                movie: nowPlayingMovies[index],
+                              ),
                             )
                           : const MovieCardCurlyShimmer();
                     },

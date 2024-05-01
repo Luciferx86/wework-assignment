@@ -6,12 +6,10 @@ import 'package:wework/screens/home_screen/now_playing_movies_list/movie_curly_c
 
 class MovieCardCurly extends StatelessWidget {
   final Movie movie;
-  final Widget? child;
 
   const MovieCardCurly({
     required this.movie,
     Key? key,
-    this.child,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -38,84 +36,93 @@ class MovieCardCurly extends StatelessWidget {
                     ),
                   ),
                 ),
-                child: child,
               ),
             ),
           ),
           Positioned(
             top: 8,
-            left: 36,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  movie.voteAverage.toStringAsFixed(2),
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(width: 4),
-                const Icon(
-                  Icons.star,
-                  size: 20,
-                  color: Colors.yellow,
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 8,
-            right: 12,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(99),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 2,
-                      horizontal: 6,
-                    ),
+            child: SizedBox(
+              width: 280,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 36),
                     child: Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(
-                          Icons.visibility_outlined,
-                          size: 18,
-                          color: Colors.white,
+                        Text(
+                          movie.voteAverage.toStringAsFixed(2),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(width: 4),
-                        Text(
-                          movie.popularity.toStringAsFixed(0),
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                            letterSpacing: -1,
+                        const Icon(
+                          Icons.star,
+                          size: 20,
+                          color: Colors.yellow,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.4),
+                            borderRadius: BorderRadius.circular(99),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 2,
+                              horizontal: 6,
+                            ),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.visibility_outlined,
+                                  size: 18,
+                                  color: Colors.white,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  movie.popularity.toStringAsFixed(0),
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                    letterSpacing: -1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.4),
+                            borderRadius: BorderRadius.circular(99),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(3),
+                            child: Icon(
+                              Icons.favorite_outline,
+                              size: 18,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                ),
-                const SizedBox(width: 4),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(99),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(3),
-                    child: Icon(
-                      Icons.favorite_outline,
-                      size: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           Positioned(

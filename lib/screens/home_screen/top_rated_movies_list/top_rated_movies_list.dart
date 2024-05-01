@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wework/enums/movie_type_enum.dart';
 import 'package:wework/enums/movie_loading_status.dart';
+import 'package:wework/models/movie_model.dart';
 import 'package:wework/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:wework/screens/home_screen/bloc/state/home_state.dart';
 import 'package:wework/screens/home_screen/top_rated_movies_list/top_rated_movie_card.dart';
@@ -11,7 +12,8 @@ import 'package:wework/widgets/movie_error_widget.dart';
 import 'package:wework/widgets/section_header.dart';
 
 class TopRatedMoviesList extends StatelessWidget {
-  const TopRatedMoviesList({super.key});
+  final Function({required Movie movie}) onMovieTap;
+  const TopRatedMoviesList({required this.onMovieTap, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +55,11 @@ class TopRatedMoviesList extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext ctxt, int i) {
                       return state.topRatedMoviesStatus.isSuccess
-                          ? TopRatedMovieCard(
-                              movie: topRatedMovies[i],
+                          ? GestureDetector(
+                              onTap: () => onMovieTap(movie: topRatedMovies[i]),
+                              child: TopRatedMovieCard(
+                                movie: topRatedMovies[i],
+                              ),
                             )
                           : const TopRatedMovieCardShimmer();
                     },

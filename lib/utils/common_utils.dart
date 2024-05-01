@@ -153,6 +153,8 @@ class CommonUtils {
     switch (languageCode) {
       case "ar":
         return "Arabic";
+      case "hi":
+        return "Hindi";
       case "en":
         return "English";
       default:
