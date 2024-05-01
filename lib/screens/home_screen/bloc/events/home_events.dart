@@ -27,3 +27,11 @@ class CleanAndReFetchMoviesEvent extends HomeEvent {
   @override
   List<Object?> get props => [];
 }
+
+class SearchQueryChangedEvent extends HomeEvent {
+  final String query;
+  const SearchQueryChangedEvent({required this.query});
+
+  @override
+  List<Object?> get props => [];
+}
