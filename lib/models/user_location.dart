@@ -1,7 +1,7 @@
 class UserLocation {
   final String mainAddress;
   final String subAddress;
-  UserLocation({
+  const UserLocation({
     required this.mainAddress,
     required this.subAddress,
   });

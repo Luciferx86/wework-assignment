@@ -5,6 +5,13 @@ abstract class HomeEvent extends Equatable {
   const HomeEvent();
 }
 
+class LoadInitialState extends HomeEvent {
+  const LoadInitialState();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class FetchMoviesEvent extends HomeEvent {
   final MovieType movieType;
   const FetchMoviesEvent({required this.movieType});
