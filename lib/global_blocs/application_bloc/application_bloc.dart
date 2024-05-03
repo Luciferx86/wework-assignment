@@ -5,7 +5,7 @@ import 'package:wework/enums/location_error.dart';
 import 'package:wework/global_blocs/application_bloc/events/application_bloc_events.dart';
 import 'package:wework/global_blocs/application_bloc/state/application_state.dart';
 import 'package:wework/models/user_location.dart';
-import 'package:wework/services/application_repo.dart';
+import 'package:wework/global_blocs/application_bloc/repo/application_repo.dart';
 
 class ApplicationBloc extends Bloc<ApplicationBlocEvent, ApplicationState> {
   final ApplicationRepo applicationRepo;
