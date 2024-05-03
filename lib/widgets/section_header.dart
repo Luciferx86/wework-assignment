@@ -23,7 +23,6 @@ class SectionHeader extends StatelessWidget {
         Expanded(
           child: Container(
             height: 2,
-            // width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [

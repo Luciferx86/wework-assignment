@@ -12,7 +12,7 @@ import 'package:wework/utils/constants.dart';
 abstract class HomeRepo {
   Future<List<Movie>> getMovies({
     required MovieType movieType,
-    int pageNumber,
+    required int pageNumber,
   });
   Future<HomeState?> loadCaches();
 }
@@ -21,10 +21,11 @@ class HomeRepoImpl implements HomeRepo {
   final HttpService httpService;
 
   HomeRepoImpl() : httpService = HttpService(Constants.BASE_URL);
+
   @override
   Future<List<Movie>> getMovies({
     required MovieType movieType,
-    int pageNumber = 1,
+    required int pageNumber,
   }) async {
     Response response = await httpService.getRequest(
       "/movie/${movieType.apiPath}?language=en-US&page=$pageNumber",

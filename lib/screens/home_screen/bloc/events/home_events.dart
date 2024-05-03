@@ -40,5 +40,5 @@ class SearchQueryChangedEvent extends HomeEvent {
   const SearchQueryChangedEvent({required this.query});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [query];
 }

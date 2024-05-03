@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wework/enums/movie_type_enum.dart';
 import 'package:wework/models/movie_model.dart';
 
+// Follows Singleton pattern to ensure only one instance of the class is created
 class CacheService {
   static final CacheService _singleton = CacheService._internal();
 

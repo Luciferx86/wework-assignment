@@ -13,6 +13,7 @@ abstract class ApplicationRepo {
 class ApplicationRepoImpl implements ApplicationRepo {
   LocationService locationService;
   ApplicationRepoImpl() : locationService = LocationService();
+
   @override
   Future<UserLocation> getUserLocation() async {
     try {

@@ -1,3 +1,0 @@
-Possible Improvements: 
-
-a single curly container that can contain a single svg path, with extendsble height

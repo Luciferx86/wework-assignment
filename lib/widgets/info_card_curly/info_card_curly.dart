@@ -2,16 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:wework/widgets/info_card_curly/info_card_curly_clipper.dart';
 
 class InfoCardCurly extends StatelessWidget {
-  // final String imageURL;
-  final bool isFlipped;
   final double scale;
   final Widget? child;
 
   const InfoCardCurly({
     Key? key,
     this.child,
-    // required this.imageURL,
-    this.isFlipped = false,
     this.scale = 1,
   }) : super(key: key);
   @override
@@ -20,11 +16,7 @@ class InfoCardCurly extends StatelessWidget {
       height: 120,
       width: double.infinity,
       child: ClipPath(
-        // child: CachedNetworkImage(imageUrl: imageURL, fit: BoxFit.contain),
-        clipper: InfoCardCurlyClipper(
-          isFlipped: isFlipped,
-        ),
-        // child: CachedNetworkImage(imageUrl: imageURL, fit: BoxFit.contain),
+        clipper: InfoCardCurlyClipper(),
         child: Container(
           height: 200,
           width: 200,
