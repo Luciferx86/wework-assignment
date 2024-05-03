@@ -8,7 +8,7 @@ import 'screens/start_page/main_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await CacheService().initialise();
+  await CacheServiceImpl().initialise();
   runApp(
     BlocProvider(
       create: (context) => ApplicationBloc(

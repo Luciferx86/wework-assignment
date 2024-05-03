@@ -43,10 +43,10 @@ class HomeRepoImpl implements HomeRepo {
   Future<HomeState?> loadCaches() async {
     try {
       List caches = await Future.wait([
-        CacheService().getMovies(
+        CacheServiceImpl().getMovies(
           movieType: MovieType.NOW_PLAYING,
         ),
-        CacheService().getMovies(
+        CacheServiceImpl().getMovies(
           movieType: MovieType.TOP_RATED,
         ),
       ]);

@@ -8,9 +8,11 @@ import 'package:wework/services/cache_service.dart';
 
 class HomeScreenBloc extends Bloc<HomeEvent, HomeState> {
   final HomeRepo homeRepo;
+  final CacheService cacheService;
 
   HomeScreenBloc({
     required this.homeRepo,
+    required this.cacheService,
   }) : super(const HomeState()) {
     on<LoadInitialState>(_mapLoadInitialStateToState);
     on<FetchMoviesEvent>(_mapFetchMoviesEventToState);
@@ -76,7 +78,7 @@ class HomeScreenBloc extends Bloc<HomeEvent, HomeState> {
           topRatedPageNumber: pageNumber + 1,
         ));
       }
-      CacheService().storeMovies(
+      cacheService.storeMovies(
         movies: type == MovieType.NOW_PLAYING
             ? state.nowPlayingMovies
             : state.topRatedMovies,
