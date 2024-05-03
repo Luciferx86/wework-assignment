@@ -5,6 +5,7 @@ import 'package:wework/screens/home_screen/bloc/repo/home_repo.dart';
 import 'package:wework/screens/home_screen/home_header.dart';
 import 'package:wework/screens/home_screen/home_screen_body.dart';
 import 'package:wework/screens/home_screen/home_screen_bottom_nav_bar.dart';
+import 'package:wework/services/cache_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -50,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: BlocProvider(
           create: (context) => HomeScreenBloc(
             homeRepo: HomeRepoImpl(),
+            cacheService: CacheServiceImpl(),
           ),
           child: const HomeScreenBody(),
         ),
